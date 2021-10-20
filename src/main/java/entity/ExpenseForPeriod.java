@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 
 @Entity
-public class IncomeForPeriod {
+public class ExpenseForPeriod {
 
     @Id
     @Column(name = "id")
@@ -13,12 +13,12 @@ public class IncomeForPeriod {
     private long id;
     @Column(name = "categoryName")
     private String categoryName;
-    @Column(name = "income")
-    private BigDecimal income;
+    @Column(name = "expense")
+    private BigDecimal expense;
 
-    public IncomeForPeriod(String categoryName, BigDecimal income) {
+    public ExpenseForPeriod(String categoryName, BigDecimal expense) {
         this.categoryName = categoryName;
-        this.income = income;
+        this.expense = expense;
     }
 
     public String getCategoryName() {
@@ -29,11 +29,11 @@ public class IncomeForPeriod {
         this.categoryName = categoryName;
     }
 
-    public BigDecimal getIncome() {
-        return income;
+    public BigDecimal getExpense() {
+        return expense;
     }
 
-    public void setIncome(BigDecimal income) {
-        this.income = income;
+    public void setExpense(BigDecimal expense) {
+        this.expense = expense;
     }
 }
