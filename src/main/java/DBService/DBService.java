@@ -1,7 +1,9 @@
+/*
 package DBService;
 
 import entity.*;
-import entity.dao.UserDao;
+import dao.PeriodDao;
+import dao.UserDao;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,8 +38,8 @@ public class DBService {
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         configuration.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
         configuration.setProperty("hibernate.connection.url", "jdbc:h2:./h2db");
-        configuration.setProperty("hibernate.connection.username", "test"); // tully
-        configuration.setProperty("hibernate.connection.password", "test"); // tully
+        configuration.setProperty("hibernate.connection.username", "test");
+        configuration.setProperty("hibernate.connection.password", "test");
         configuration.setProperty("hibernate.show_sql", hibernate_show_sql);
         configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
 
@@ -87,4 +89,18 @@ public class DBService {
             throw new DBException(e);
         }
     }
+
+    public void insertPeriod(Period period) throws DBException {
+        try {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            PeriodDao dao = new PeriodDao(session);
+            dao.insertPeriod(period);
+            transaction.commit();
+            session.close();
+        } catch (HibernateException e) {
+            throw new DBException(e);
+        }
+    }
 }
+*/

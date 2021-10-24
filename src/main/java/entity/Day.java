@@ -7,7 +7,6 @@ import org.joda.time.LocalDate;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
 public class Day {
     @Id
     @Column(name = "id")

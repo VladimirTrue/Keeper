@@ -4,24 +4,19 @@ import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
-@Entity
 public class User {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id;
-    @Column(name = "login", unique = true, updatable = false)
     private String login;
-    @Column(name = "password", unique = true, updatable = false)
     private String password;
-    @Column(name = "email", unique = true, updatable = false)
     private String email;
-    @Transient
-    private List<Period> periods;
+    private Map<String, Period> periods;
 
     public User() {
 
@@ -31,31 +26,52 @@ public class User {
         this.login = login;
         this.password = password;
         this.email = email;
-        this.periods = new ArrayList<Period>();
+        this.periods = new HashMap<>();
     }
 
-    private void createPeriod(String name, LocalDate startDte, LocalDate endDate){
-        periods.add(new Period(name, startDte, endDate));
+    public void createPeriod(String name, LocalDate startDte, LocalDate endDate) {
+        periods.put(name, new Period(this.id, name, startDte, endDate));
     }
 
-    public void setPeriod(Period period) {
-        periods.add(period);
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getLogin() {
         return login;
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public List<Period> getPeriods() {
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Map<String, Period> getPeriods() {
         return periods;
+    }
+
+    public void setPeriods(Map<String, Period> periods) {
+        this.periods = periods;
     }
 
     @Override
@@ -65,7 +81,6 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", periods=" + periods +
                 '}';
     }
 }

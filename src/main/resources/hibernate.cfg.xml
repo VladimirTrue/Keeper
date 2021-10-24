@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
+    <session-factory>
+        <property name="connection.url">jdbc:h2:./h2db</property>
+        <property name="connection.driver_class">org.h2.Driver</property>
+        <property name="connection.username">test</property>
+        <property name="connection.password">test</property>
+        <property name="dialect">org.hibernate.dialect.H2Dialect</property>
+        <property name="show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+
+        <mapping resource="/entity/User.hbm.xml" />
+        <mapping resource="/entity/Period.hbm.xml" />
+    </session-factory>
+
+</hibernate-configuration>

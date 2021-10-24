@@ -8,31 +8,26 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 public class Period {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id;
-    @Column(name = "name", unique = true)
-    private String name;
-    @Column(name = "startDate")
+    private long userId;
+    private String periodName;
     private LocalDate startDate;
-    @Column(name = "endDate")
     private LocalDate endDate;
-    @Transient
+
+
     private List<IncomeForPeriod> incomesList;
-    @Transient
     private List<ExpenseForPeriod> expensesList;
-    @Transient
     private List<Day> dayList;
 
     public Period() {
     }
 
-    public Period(String name, LocalDate startDate, LocalDate endDate) {
-        this.name = name;
+    public Period(long userId, String periodName, LocalDate startDate, LocalDate endDate) {
+        this.userId = userId;
+        this.periodName = periodName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.incomesList = new ArrayList<>();
@@ -54,65 +49,69 @@ public class Period {
         incomesList.add(currIncomeForPeriod);
     }
 
-    private void changeIncome(IncomeForPeriod incomeForPeriod,BigDecimal income) {
-        IncomeForPeriod currIncomeForPeriod = incomesList.get(incomesList.indexOf(incomeForPeriod));
-        currIncomeForPeriod.setIncome(income);
-        incomesList.remove(incomeForPeriod);
-        incomesList.add(currIncomeForPeriod);
+
+    public long getId() {
+        return id;
     }
 
-    private void changeIncome(IncomeForPeriod incomeForPeriod, String name) {
-        IncomeForPeriod currIncomeForPeriod = incomesList.get(incomesList.indexOf(incomeForPeriod));
-        currIncomeForPeriod.setCategoryName(name);
-        incomesList.remove(incomeForPeriod);
-        incomesList.add(currIncomeForPeriod);
+    public void setId(long id) {
+        this.id = id;
     }
 
 
-    private void changeExpense(ExpenseForPeriod expenseForPeriod, String name, BigDecimal expense) {
-        ExpenseForPeriod currExpenseForPeriod = expensesList.get(incomesList.indexOf(expenseForPeriod));
-        currExpenseForPeriod.setCategoryName(name);
-        currExpenseForPeriod.setExpense(expense);
-        expensesList.remove(expenseForPeriod);
-        expensesList.add(currExpenseForPeriod);
+    public long getUserId() {
+        return userId;
     }
 
-    private void changeExpense(ExpenseForPeriod expenseForPeriod, String name) {
-        ExpenseForPeriod currExpenseForPeriod = expensesList.get(incomesList.indexOf(expenseForPeriod));
-        currExpenseForPeriod.setCategoryName(name);
-        expensesList.remove(expenseForPeriod);
-        expensesList.add(currExpenseForPeriod);
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    private void changeExpense(ExpenseForPeriod expenseForPeriod, BigDecimal expense) {
-        ExpenseForPeriod currExpenseForPeriod = expensesList.get(incomesList.indexOf(expenseForPeriod));
-        currExpenseForPeriod.setExpense(expense);
-        expensesList.remove(expenseForPeriod);
-        expensesList.add(currExpenseForPeriod);
+    public String getPeriodName() {
+        return periodName;
     }
 
+    public void setPeriodName(String periodName) {
+        this.periodName = periodName;
+    }
 
     public LocalDate getStartDate() {
         return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public LocalDate getEndDate() {
         return endDate;
     }
 
-    public String getName() {
-        return name;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public List<IncomeForPeriod> getIncomesList() {
         return incomesList;
     }
 
+    public void setIncomesList(List<IncomeForPeriod> incomesList) {
+        this.incomesList = incomesList;
+    }
+
     public List<ExpenseForPeriod> getExpensesList() {
         return expensesList;
     }
 
+    public void setExpensesList(List<ExpenseForPeriod> expensesList) {
+        this.expensesList = expensesList;
+    }
+
     public List<Day> getDayList() {
         return dayList;
+    }
+
+    public void setDayList(List<Day> dayList) {
+        this.dayList = dayList;
     }
 }
